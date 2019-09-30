@@ -1,20 +1,57 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://obj/wall/Wall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://obj/ball/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://obj/hole/Hole.tscn" type="PackedScene" id=3]
+[ext_resource path="res://obj/hole/Hole.gd" type="Script" id=4]
 
 [node name="L1" type="Node2D"]
 
 [node name="walls" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 103.606, 151.093 )
 
 [node name="Wall" parent="walls" instance=ExtResource( 1 )]
 position = Vector2( -3.24707, 80.0506 )
-scale = Vector2( 50, 1 )
+scale = Vector2( 22.88, 1 )
+
+[node name="Wall5" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( -5.83176, -262.423 )
+scale = Vector2( 35, 1 )
+
+[node name="Wall8" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( -248.794, -407.166 )
+scale = Vector2( 35, 1 )
+
+[node name="Wall4" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( -211.297, -96.6491 )
+scale = Vector2( 22.88, 1 )
 
 [node name="Wall2" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( 92.7789, 9.74589 )
-scale = Vector2( 1, 20 )
+position = Vector2( 101.825, -122.074 )
+scale = Vector2( 1, 40 )
+
+[node name="Wall6" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( -322.066, -212.539 )
+scale = Vector2( 1, 40 )
+
+[node name="Wall7" parent="walls" instance=ExtResource( 1 )]
+position = Vector2( -173.446, -336.605 )
+scale = Vector2( 1, 15 )
 
 [node name="Wall3" parent="walls" instance=ExtResource( 1 )]
 position = Vector2( -101.845, -2.25736 )
 scale = Vector2( 1, 20 )
 
+[node name="Ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( 100.582, 155.41 )
+rotation = 1.5708
+
+[node name="Camera2D" type="Camera2D" parent="Ball"]
+current = true
+
+[node name="Hole" parent="." instance=ExtResource( 3 )]
+position = Vector2( -148.281, -198.614 )
+script = ExtResource( 4 )
+
+[connection signal="body_entered" from="Hole" to="Hole" method="_on_Hole_body_entered"]
