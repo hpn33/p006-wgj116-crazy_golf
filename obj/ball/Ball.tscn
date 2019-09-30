@@ -4,14 +4,16 @@
 [ext_resource path="res://assets/sprite/default/circle.png" type="Texture" id=2]
 [ext_resource path="res://obj/ball/Force.gd" type="Script" id=3]
 
-[sub_resource type="PhysicsMaterial" id=2]
+[sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.6
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 6.29442
 
-[node name="Ball" type="RigidBody2D"]
-physics_material_override = SubResource( 2 )
+[node name="Ball" type="RigidBody2D" groups=[
+"ball",
+]]
+physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 script = ExtResource( 1 )
 
@@ -20,7 +22,7 @@ scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Force" type="Node2D" parent="."]
 script = ExtResource( 3 )
