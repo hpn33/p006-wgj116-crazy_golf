@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://obj/wall/Wall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://obj/ball/Ball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://obj/hole/Hole.tscn" type="PackedScene" id=3]
-[ext_resource path="res://obj/hole/Hole.gd" type="Script" id=4]
+[ext_resource path="res://obj/special_camera/SCam.tscn" type="PackedScene" id=3]
+[ext_resource path="res://obj/hole/Hole.tscn" type="PackedScene" id=4]
+[ext_resource path="res://obj/hole/Hole.gd" type="Script" id=5]
 
 [node name="L1" type="Node2D"]
 
@@ -47,11 +48,10 @@ scale = Vector2( 1, 20 )
 position = Vector2( 100.582, 155.41 )
 rotation = 1.5708
 
-[node name="Camera2D" type="Camera2D" parent="Ball"]
-current = true
+[node name="SCam" parent="." instance=ExtResource( 3 )]
 
-[node name="Hole" parent="." instance=ExtResource( 3 )]
+[node name="Hole" parent="." instance=ExtResource( 4 )]
 position = Vector2( -148.281, -198.614 )
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [connection signal="body_entered" from="Hole" to="Hole" method="_on_Hole_body_entered"]
