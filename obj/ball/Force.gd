@@ -1,5 +1,8 @@
 extends Node2D
 
+var touchable := false
+var touched := false
+
 var speed = Vector2(250, 0)
 var rot := 0.0
 
@@ -14,11 +17,13 @@ var omp := Vector2()
 
 var coefficient := Vector2()
 
+
+
 func _process(delta: float) -> void:
 	
 	get_mouse_position()
 	
-	if Input.is_action_pressed('cl'):
+	if Input.is_action_pressed('cl') and (touchable or touched):
 		
 		force_point = lerp(force_point, omp, 10 * delta)
 		
@@ -31,12 +36,14 @@ func _process(delta: float) -> void:
 		force_point.x = clamp(force_point.x, -signx * x.x, signx * x.x)
 		force_point.y = clamp(force_point.y, -signy * x.y, signy * x.y)
 		
-	elif Input.is_action_just_released('cl'):
+		touched = true
+	elif Input.is_action_just_released('cl') and touched:
 		coefficient = force_point / max_force_rot
 		
 		force = speed.rotated(rot) * coefficient
 		
 		owner.linear_velocity = force
+		touched = false
 	else:
 		
 		force_point = lerp(force_point, Vector2(), 15 * delta)
@@ -59,8 +66,14 @@ func get_mouse_position():
 
 func _draw() -> void:
 	
+	
 	# force line
 	draw_line(Vector2(), force_point.rotated(-owner.rotation), Color.white, 5)
+	
+	if not main.debug:
+		return
+	
+	
 	
 	# force point
 	draw_circle(force_point.rotated(-owner.rotation + PI), 5, Color.red)
