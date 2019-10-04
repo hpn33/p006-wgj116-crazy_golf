@@ -1,8 +1,9 @@
 extends Area2D
 
-func _on_Hole_body_entered(body: PhysicsBody2D) -> void:
+export var next_level := 0
+
+onready var sound = $AudioStreamPlayer2D
+
+func _on_AudioStreamPlayer2D_finished() -> void:
 	
-	if body.is_in_group('ball'):
-		get_tree().reload_current_scene()
-	
-	pass # Replace with function body.
+		level.load_level(next_level)

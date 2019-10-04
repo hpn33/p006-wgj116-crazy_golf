@@ -26,6 +26,13 @@ var rot := 0.0
 
 
 
+var target_position := Vector2()
+
+var follow_zoom = Vector2.ONE * 0.57
+var ball_zoom = Vector2.ONE * 0.5
+var shoot_zoom = Vector2.ONE * 0.7
+
+
 
 func _ready() -> void:
 	change_mode(mode.ball)
@@ -43,7 +50,7 @@ func _process(delta: float) -> void:
 	
 	get_mouse_position()
 	
-	print(cmode)
+#	print(cmode)
 	
 	match cmode:
 		mode.free:
@@ -85,15 +92,6 @@ func enter(enter_mode):
 			pass
 
 
-
-
-#func set_freee():
-#	drag_margin_bottom = 0
-#	drag_margin_top = 0
-#	drag_margin_left = 0
-#	drag_margin_right = 0
-
-
 func freee(delta):
 	
 	# move
@@ -123,8 +121,7 @@ func freee(delta):
 		zoom = Vector2.ONE
 	
 
-var target_position := Vector2()
-var ball_zoom = Vector2.ONE * 0.5
+
 
 func set_ball():
 #	target_position = ball.position
@@ -171,7 +168,7 @@ func ball(delta):
 func shoot(delta):
 	
 	position = lerp(position, ball.position, delta)
-	zoom = lerp(zoom, ball_zoom, delta)
+	zoom = lerp(zoom, shoot_zoom, delta)
 	
 	rang_point = omp - offset
 	
@@ -202,7 +199,7 @@ func shoot(delta):
 	pass
 
 
-var follow_zoom = Vector2.ONE * 0.6
+
 func follow(delta):
 	
 	position = lerp(position, ball.position, 7*delta)
@@ -229,6 +226,7 @@ func get_mouse_position():
 	
 	# rotation of owner position and global position
 	rot = Vector2().angle_to_point(omp)
+
 
 
 

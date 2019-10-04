@@ -1,43 +1,55 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://obj/wall/Wall.tscn" type="PackedScene" id=1]
-[ext_resource path="res://obj/ball/Ball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://obj/hole/Hole.tscn" type="PackedScene" id=3]
-[ext_resource path="res://obj/hole/Hole.gd" type="Script" id=4]
-[ext_resource path="res://obj/special_camera/SCam.tscn" type="PackedScene" id=5]
+[ext_resource path="res://obj/part/p-tr0l.tscn" type="PackedScene" id=1]
+[ext_resource path="res://obj/part/p-0r0l.tscn" type="PackedScene" id=2]
+[ext_resource path="res://obj/part/p-0rdl.tscn" type="PackedScene" id=3]
+[ext_resource path="res://obj/block/block.tscn" type="PackedScene" id=4]
+[ext_resource path="res://obj/hole/Hole.tscn" type="PackedScene" id=5]
+[ext_resource path="res://obj/ball/Ball.tscn" type="PackedScene" id=6]
+[ext_resource path="res://obj/special_camera/SCam.tscn" type="PackedScene" id=7]
 
 [node name="L3" type="Node2D"]
 
-[node name="walls" type="Node2D" parent="."]
+[node name="w" type="Node2D" parent="."]
+editor/display_folded = true
 
-[node name="Wall" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -3.24704, 195.682 )
-scale = Vector2( 41.94, 1 )
+[node name="p01" parent="w" instance=ExtResource( 1 )]
+position = Vector2( 0, -200 )
 
-[node name="Wall5" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -4.47137, -195.765 )
-scale = Vector2( 42.71, 1 )
+[node name="p02" parent="w" instance=ExtResource( 2 )]
+position = Vector2( 0, -100 )
 
-[node name="Wall2" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( 201.132, -7.80269 )
-scale = Vector2( 1, 40 )
+[node name="p03" parent="w" instance=ExtResource( 2 )]
 
-[node name="Wall6" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -188.75, -3.04163 )
-scale = Vector2( 1, 40 )
+[node name="p04" parent="w" instance=ExtResource( 2 )]
+position = Vector2( 0, 100 )
 
-[node name="Wall3" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -2.53778, 87.5272 )
-scale = Vector2( 1, 33.86 )
+[node name="p" parent="w" instance=ExtResource( 3 )]
+position = Vector2( 0, 200 )
 
-[node name="Ball" parent="." instance=ExtResource( 2 )]
-position = Vector2( 100.582, 155.41 )
+[node name="blocks" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="block" parent="blocks" instance=ExtResource( 4 )]
+position = Vector2( -100, 59.3217 )
+offset = Vector2( 58, 0 )
+
+[node name="block2" parent="blocks" instance=ExtResource( 4 )]
+position = Vector2( 54.8184, -124.799 )
+offset = Vector2( 70, 0 )
+
+[node name="block3" parent="blocks" instance=ExtResource( 4 )]
+position = Vector2( -55, -46.6535 )
+offset = Vector2( -58, 0 )
+
+[node name="Hole" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -200 )
+next_level = 1
+
+[node name="Ball" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, 200 )
 rotation = 1.5708
 
-[node name="Hole" parent="." instance=ExtResource( 3 )]
-position = Vector2( -118.201, 153.67 )
-script = ExtResource( 4 )
-
-[node name="SCam" parent="." instance=ExtResource( 5 )]
+[node name="SCam" parent="." instance=ExtResource( 7 )]
 
 [connection signal="body_entered" from="Hole" to="Hole" method="_on_Hole_body_entered"]

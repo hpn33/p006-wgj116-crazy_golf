@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://obj/ball/Ball.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprite/default/circle.png" type="Texture" id=2]
-[ext_resource path="res://obj/ball/Force.gd" type="Script" id=3]
+[ext_resource path="res://obj/ball/wallDetector.gd" type="Script" id=3]
 [ext_resource path="res://obj/ball/Area2D.gd" type="Script" id=4]
+[ext_resource path="res://obj/ball/Force.gd" type="Script" id=5]
+[ext_resource path="res://assets/sound/hit2.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sound/drap_hole.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sound/hig_shoot.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sound/hit.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sound/low_shoot.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sound/min_shoot.wav" type="AudioStream" id=11]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.8
@@ -11,8 +18,119 @@ bounce = 0.8
 [sub_resource type="CircleShape2D" id=2]
 radius = 6.29442
 
+[sub_resource type="CircleShape2D" id=10]
+radius = 7.00424
+
 [sub_resource type="CircleShape2D" id=3]
 radius = 12.59
+
+[sub_resource type="Animation" id=9]
+resource_name = "drop"
+length = 0.001
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hig"
+length = 0.001
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "hit"
+length = 0.001
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "hit2"
+length = 0.001
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 6 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "low"
+length = 0.001
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "mid"
+length = 0.001
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Audio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 11 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [node name="Ball" type="RigidBody2D" groups=[
 "ball",
@@ -21,21 +139,58 @@ physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="body" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="Sprite" type="Sprite" parent="body"]
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+[node name="ghost" type="Sprite" parent="body"]
+modulate = Color( 0.498039, 0.498039, 0.498039, 0.0705882 )
+scale = Vector2( 0.058, 0.058 )
+texture = ExtResource( 2 )
 
-[node name="Force" type="Node2D" parent="."]
+[node name="wallDetector" type="Area2D" parent="." groups=[
+"camera_shaker",
+]]
+editor/display_folded = true
 script = ExtResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wallDetector"]
+visible = false
+shape = SubResource( 10 )
+
+[node name="toucher" type="Area2D" parent="."]
+editor/display_folded = true
 script = ExtResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="toucher"]
+visible = false
 shape = SubResource( 3 )
 
-[connection signal="mouse_entered" from="Area2D" to="Area2D" method="_on_Area2D_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="Area2D" method="_on_Area2D_mouse_exited"]
+[node name="Force" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="sound" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="sound"]
+stream = ExtResource( 6 )
+volume_db = -11.277
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sound"]
+anims/drop = SubResource( 9 )
+anims/hig = SubResource( 6 )
+anims/hit = SubResource( 7 )
+anims/hit2 = SubResource( 8 )
+anims/low = SubResource( 4 )
+anims/mid = SubResource( 5 )
+
+[connection signal="body_entered" from="wallDetector" to="wallDetector" method="_on_wallDetector_body_entered"]
+[connection signal="mouse_entered" from="toucher" to="toucher" method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="toucher" to="toucher" method="_on_Area2D_mouse_exited"]

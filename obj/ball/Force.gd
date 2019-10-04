@@ -3,11 +3,11 @@ extends Node2D
 var touchable := false
 var touched := false
 
-var speed = Vector2(250, 0)
+var speed = Vector2(300, 0)
 var rot := 0.0
 
 var force := Vector2()
-var max_force := Vector2(-120, 0)
+var max_force := Vector2(-80, 0)
 var max_force_rot := Vector2()
 
 var force_point := Vector2()
@@ -42,6 +42,18 @@ func _process(delta: float) -> void:
 		
 		force = speed.rotated(rot) * coefficient
 		
+		
+		var avrag = avrage(coefficient)
+		
+		if avrag > 80:
+			owner.play('hig')
+		elif avrag > 40:
+			owner.play('mid')
+		else:
+			owner.play('low')
+			
+		
+		
 		owner.linear_velocity = force
 		touched = false
 	else:
@@ -68,7 +80,7 @@ func _draw() -> void:
 	
 	
 	# force line
-	draw_line(Vector2(), force_point.rotated(-owner.rotation), Color.white, 5)
+	draw_line(Vector2(), force_point.rotated(-owner.rotation), Color.gray, 3)
 	
 	if not main.debug:
 		return
@@ -83,5 +95,9 @@ func _draw() -> void:
 
 
 
-
+func avrage(coefficient):
+	var plus = coefficient.x + coefficient.y
+	var div = plus / 2
+	
+	return div * 100
 

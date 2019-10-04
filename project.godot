@@ -21,12 +21,13 @@ _global_script_class_icons={
 [application]
 
 config/name="p006-wgj116-crazy_golf"
-run/main_scene="res://scene/Main.tscn"
+run/main_scene="res://scene/level/L1.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 main="*res://autoload/main.gd"
+level="*res://autoload/level.gd"
 
 [input]
 

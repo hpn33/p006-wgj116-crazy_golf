@@ -1,55 +1,43 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://obj/wall/Wall.tscn" type="PackedScene" id=1]
-[ext_resource path="res://obj/block/block.tscn" type="PackedScene" id=2]
-[ext_resource path="res://obj/ball/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://obj/part/p-tr00.tscn" type="PackedScene" id=1]
+[ext_resource path="res://obj/part/p-0r0l.tscn" type="PackedScene" id=2]
+[ext_resource path="res://obj/part/p-0rdl.tscn" type="PackedScene" id=3]
 [ext_resource path="res://obj/hole/Hole.tscn" type="PackedScene" id=4]
-[ext_resource path="res://obj/hole/Hole.gd" type="Script" id=5]
+[ext_resource path="res://obj/ball/Ball.tscn" type="PackedScene" id=5]
 [ext_resource path="res://obj/special_camera/SCam.tscn" type="PackedScene" id=6]
 
-[node name="L1" type="Node2D"]
+[node name="L2" type="Node2D"]
 
-[node name="walls" type="Node2D" parent="."]
+[node name="w" type="Node2D" parent="."]
 editor/display_folded = true
-position = Vector2( 103.606, 151.093 )
 
-[node name="Wall" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -3.24707, 80.0506 )
-scale = Vector2( 22.88, 1 )
+[node name="p" parent="w" instance=ExtResource( 1 )]
+position = Vector2( 50, -50 )
 
-[node name="Wall5" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( 0.319885, -518.741 )
-scale = Vector2( 35, 1 )
+[node name="p3" parent="w" instance=ExtResource( 1 )]
+position = Vector2( -50, -50 )
+scale = Vector2( -1, 1 )
 
-[node name="Wall2" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( 107.977, -243.056 )
-scale = Vector2( 1, 66.21 )
+[node name="p01" parent="w" instance=ExtResource( 2 )]
+position = Vector2( 50, 50 )
 
-[node name="Wall3" parent="walls" instance=ExtResource( 1 )]
-position = Vector2( -105.28, -238.955 )
-scale = Vector2( 1, 66.21 )
+[node name="p02" parent="w" instance=ExtResource( 2 )]
+position = Vector2( -50, 50 )
 
-[node name="blocks" type="Node2D" parent="."]
+[node name="p2" parent="w" instance=ExtResource( 3 )]
+position = Vector2( 50, 147.014 )
 
-[node name="block" parent="blocks" instance=ExtResource( 2 )]
-position = Vector2( -1.16635, 44.3217 )
-offset = Vector2( 58, 0 )
-
-[node name="block2" parent="blocks" instance=ExtResource( 2 )]
-position = Vector2( 54.8184, -124.799 )
-offset = Vector2( 70, 0 )
-
-[node name="block3" parent="blocks" instance=ExtResource( 2 )]
-position = Vector2( 212.275, -46.6535 )
-offset = Vector2( -58, 0 )
-
-[node name="Ball" parent="." instance=ExtResource( 3 )]
-position = Vector2( 100.582, 155.41 )
-rotation = 1.5708
+[node name="p4" parent="w" instance=ExtResource( 3 )]
+position = Vector2( -50, 147.014 )
 
 [node name="Hole" parent="." instance=ExtResource( 4 )]
-position = Vector2( 101.885, -299.091 )
-script = ExtResource( 5 )
+position = Vector2( -50, 147.014 )
+next_level = 3
+
+[node name="Ball" parent="." instance=ExtResource( 5 )]
+position = Vector2( 50, 147.014 )
+rotation = 1.5708
 
 [node name="SCam" parent="." instance=ExtResource( 6 )]
 
