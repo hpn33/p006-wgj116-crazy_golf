@@ -19,3 +19,6 @@ func play(sound_name:String):
 
 func be_slow():
 	linear_velocity *= 0.01
+
+func text(tx):
+	$Label.text = str(tx)

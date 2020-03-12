@@ -18,13 +18,13 @@ bounce = 0.8
 [sub_resource type="CircleShape2D" id=2]
 radius = 6.29442
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=3]
 radius = 7.00424
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 12.59
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=5]
 resource_name = "drop"
 length = 0.001
 tracks/0/type = "audio"
@@ -96,8 +96,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "low"
+[sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "audio"
 tracks/0/path = NodePath("Audio")
@@ -114,8 +113,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "mid"
+[sub_resource type="Animation" id=10]
 length = 0.001
 tracks/0/type = "audio"
 tracks/0/path = NodePath("Audio")
@@ -163,15 +161,14 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wallDetector"]
 visible = false
-shape = SubResource( 10 )
+shape = SubResource( 3 )
 
 [node name="toucher" type="Area2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="toucher"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Force" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -184,13 +181,20 @@ stream = ExtResource( 6 )
 volume_db = -11.277
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="sound"]
-anims/drop = SubResource( 9 )
+anims/drop = SubResource( 5 )
 anims/hig = SubResource( 6 )
 anims/hit = SubResource( 7 )
 anims/hit2 = SubResource( 8 )
-anims/low = SubResource( 4 )
-anims/mid = SubResource( 5 )
+anims/low = SubResource( 9 )
+anims/mid = SubResource( 10 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 0.237827
+margin_top = -22.3557
+margin_right = 40.2378
+margin_bottom = -8.35567
 
 [connection signal="body_entered" from="wallDetector" to="wallDetector" method="_on_wallDetector_body_entered"]
+[connection signal="input_event" from="toucher" to="toucher" method="_on_toucher_input_event"]
 [connection signal="mouse_entered" from="toucher" to="toucher" method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="toucher" to="toucher" method="_on_Area2D_mouse_exited"]

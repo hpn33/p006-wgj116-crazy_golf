@@ -7,8 +7,8 @@ var level = [
 	"res://scene/level/L3.tscn"
 ]
 
-var current_scene = ''
-var current_level = 1
+#var current_scene = ''
+#var current_level = 1
 
 #func load_scene(current_scene):
 #

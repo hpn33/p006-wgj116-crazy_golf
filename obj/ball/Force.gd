@@ -21,7 +21,7 @@ var coefficient := Vector2()
 
 func _process(delta: float) -> void:
 	
-	get_mouse_position()
+	get_need_position()
 	
 	if Input.is_action_pressed('cl') and (touchable or touched):
 		
@@ -65,7 +65,14 @@ func _process(delta: float) -> void:
 	update()
 
 
-func get_mouse_position():
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch:
+#		owner.text(event.position)
+#		print('yes')
+		pass
+	pass
+
+func get_need_position():
 	
 	gmp = get_global_mouse_position()
 	

@@ -5,10 +5,10 @@
 [ext_resource path="res://assets/sprite/default/circle.png" type="Texture" id=3]
 [ext_resource path="res://assets/sound/drap_hole.wav" type="AudioStream" id=4]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 0.731079
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 6.51743
 
 [node name="Hole" type="Area2D" groups=[
@@ -20,10 +20,10 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="target"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="overlap" type="Sprite" parent="."]
 scale = Vector2( 0.052, 0.052 )
